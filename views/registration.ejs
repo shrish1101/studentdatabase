@@ -1,0 +1,554 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <title>Registration</title>
+
+    <style type="text/css">
+        body {
+            font-family: "arial";
+            background-color:rgb(255, 255, 204);
+            height:280%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 250%;
+        }
+        #logo {
+            position: absolute;
+            top:0%;
+            max-width: 15%;
+            max-height: 15%;
+        }
+        #header {
+            background-color: rgb(187, 187, 119);
+            width:100%;
+            height:15%;
+            position: absolute;
+            top:0%;
+            left:0%;
+        }
+        #thumbnail {
+            border-bottom: 1px solid black;
+            position: absolute;
+            top:260px;
+            left:400px;
+            max-width: 200px;
+            max-height: 230px;
+        }
+        #form {
+            background-color: rgb(187, 187, 119);
+            padding: 10px;
+            position: absolute;
+            top:41%;
+            left:51%;
+            font-size: 18px;
+            border-radius: 4px;
+            color: #f2f2f2;
+        }
+
+        #photoup {
+            background-color: rgb(187, 187, 119);
+            padding: 10px;
+            padding-right: 0px;
+            position: absolute;
+            top:210px;
+            left:-300px;
+        }
+
+        .button_form {
+            font-size: 14px;
+            padding: 6px 12px;
+        }
+
+        #whiteback {
+            background-color: white;
+            height:  1000px;
+            width: 680px;
+            position: absolute;
+            top: 215px;
+            left: 345px;
+            border-radius: 4px;
+        }
+        .topnav {
+            position: absolute;
+            top:15%;
+            background-color: rgb(187, 187, 119);
+            border:1px solid rgb(117, 117, 62);
+            border-right: 1px solid rgb(117, 117, 62);
+            border-left: 1px solid rgb(117, 117, 62);
+            left:0px;
+        }
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            padding: 13px 135px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        .topnav a:hover {
+            color: white;
+            background-color: #75753e;
+        }
+
+        #backtostudent {
+            position: absolute;
+            left: 400px;
+            top: 560px;
+        }
+
+        .img_val {
+            position: relative;
+            max-height: 16px;
+            max-width: 16px;
+            top: 5px;
+        }
+
+        #age {
+            color:white;
+            display: inline;
+        }
+
+    </style>
+
+    <script>
+        function new_username_validate() {
+            form_validate();
+            var bool=username_validate();
+            if (bool.exam) {
+                document.getElementById("imguser").src="/images/tick.png";
+                document.getElementById("imguser").title=bool.msg;
+            }
+            else {
+                document.getElementById("imguser").src="/images/wrong.png";
+                document.getElementById("imguser").title=bool.msg;
+            }
+        }
+
+        function username_validate() {
+            //alert("message");
+
+            var exam = true;
+            var msg="Accepted!";
+            var user = document.register.user_name.value;
+            if (user.charAt(0)=='$' || user.charAt(0)=='_' ||
+                (user.charCodeAt(0)>=65 && user.charCodeAt(0)<=90) ||
+                (user.charCodeAt(0)>=97 && user.charCodeAt(0)<=122)) {
+                //
+            }
+            else {
+                exam=false;
+                var msg="Username Incorrect!\nStarts with only an alphabet, dollar sign or underscore!";
+                //alert(msg);
+                return {exam,msg}; //returning as object
+            }
+            for (i=1; i<user.length; i++) {
+                if (user.charAt(i)=='$' || user.charAt(i)=='_' ||
+                    (user.charCodeAt(i)>=65 && user.charCodeAt(i)<=90) ||
+                    (user.charCodeAt(i)>=97 && user.charCodeAt(i)<=122) ||
+                    user.charCodeAt(i)>=48 && user.charCodeAt(i)<=57) {
+                    //
+                }
+                else {
+                    exam=false;
+                    var msg="Username Incorrect!\nContains only an alphabet, digit, dollar sign or underscore!";
+                    //alert(msg);
+                    return {exam,msg}; //returning as object
+                }
+            }
+            return {exam,msg}; //returning as object
+        }
+
+        function new_passwordmatch_validate() {
+            form_validate();
+            var bool=passwordmatch_validate();
+            if (bool.exam) {
+                document.getElementById("imgpassmatch").src="/images/tick.png";
+                document.getElementById("imgpassmatch").title=bool.msg;
+            }
+            else {
+                document.getElementById("imgpassmatch").src="/images/wrong.png";
+                document.getElementById("imgpassmatch").title=bool.msg;
+            }
+        }
+
+        function passwordmatch_validate() {
+            var exam=true;
+            var msg="Password Match! Accepted!";
+            var passvalue=document.register.pass_name.value;
+            var passvaluematch=document.register.passmatch_name.value;
+            if (passvalue!=passvaluematch) {
+                exam=false;
+                msg="Password do not Match!";
+            }
+            else if (passvaluematch.length==0) {
+                exam=false;
+                msg="Password cannot be empty!";
+            }
+            return {exam,msg};
+        }
+
+        function new_password_validate() {
+            form_validate();
+            new_passwordmatch_validate();
+            var bool=password_validate();
+            if (bool.exam) {
+                document.getElementById("imgpass").src="/images/tick.png";
+                document.getElementById("imgpass").title=bool.msg;
+            }
+            else {
+                document.getElementById("imgpass").src="/images/wrong.png";
+                document.getElementById("imgpass").title=bool.msg;
+            }
+
+        }
+
+        function password_validate() {
+            var exam=true;
+            var msg="Accepted!";
+            var passvalue=document.register.pass_name.value;
+            var valpass = { alphabet:false,
+                number:false,
+                special_character:false
+            };
+            if (passvalue.length<8) {
+                msg="Password must be of minimum 8 characters!";
+                exam=false;
+                return {exam,msg};
+            }
+            for (i=0; i<passvalue.length; i++) {
+                if ((passvalue.charCodeAt(i)>=65 && passvalue.charCodeAt(i)<=90) ||
+                    (passvalue.charCodeAt(i)>=97 && passvalue.charCodeAt(i)<=122)) {
+                    valpass.alphabet=true;
+                }
+                else if (passvalue.charCodeAt(i)>=48 && passvalue.charCodeAt(i)<=57) {
+                    valpass.number=true;
+                }
+                else {
+                    valpass.special_character=true;
+                }
+            }
+            if (!valpass.alphabet) {
+                var msg="Password must have a character!";
+                exam=false;
+                return {exam,msg};
+            }
+            else if (!valpass.number) {
+                var msg="Password must have a number!";
+                exam=false;
+                return {exam,msg};
+            }
+            else if (!valpass.special_character) {
+                var msg="Password must have a Special Character!";
+                exam=false;
+                return {exam,msg};
+            }
+            else
+                return {exam,msg};
+
+        }
+
+        function new_registration_validate() {
+            form_validate();
+            var bool=registration_validate();
+            if (bool.exam) {
+                document.getElementById("imgreg").src="/images/tick.png";
+                document.getElementById("imgreg").title=bool.msg;
+            }
+            else {
+                document.getElementById("imgreg").src="/images/wrong.png";
+                document.getElementById("imgreg").title=bool.msg;
+            }
+        }
+
+        function registration_validate() {
+            var exam=true;
+            var msg="Accepted!";
+            var reg_ob=document.getElementById("reg_id");
+            reg_ob.value=reg_ob.value.toUpperCase();
+            if (reg_ob.value.length==0) {
+                exam=false;
+                msg="Registration No cannot be empty!";
+            }
+            return {exam,msg};
+        }
+
+        function new_roll_validate() {
+            form_validate();
+            var bool=roll_validate();
+            if (bool.exam) {
+                document.getElementById("imgroll").src="/images/tick.png";
+                document.getElementById("imgroll").title=bool.msg;
+            }
+            else {
+                document.getElementById("imgroll").src="/images/wrong.png";
+                document.getElementById("imgroll").title=bool.msg;
+            }
+        }
+
+        function roll_validate() {
+            var exam=true;
+            var msg="Accepted!";
+            var roll_ob=document.getElementById("roll_id");
+            roll_ob.value=roll_ob.value.toUpperCase();
+            if (roll_ob.value.length==0) {
+                exam=false;
+                msg="Roll No cannot be empty!";
+            }
+            return {exam,msg};
+
+        }
+
+        function new_email_validate() {
+            form_validate();
+            var bool=email_validate();
+            if (bool.exam) {
+                document.getElementById("imgemail").src="/images/tick.png";
+                document.getElementById("imgemail").title=bool.msg;
+            }
+            else {
+                document.getElementById("imgemail").src="/images/wrong.png";
+                document.getElementById("imgemail").title=bool.msg;
+            }
+        }
+
+        function email_validate() {
+            var exam=true;
+            var msg="Accepted!";
+            var email_ob=document.getElementById("email_id");
+            email_ob.value=email_ob.value.toLowerCase();
+            if (email_ob.value.length==0) {
+                msg="Email cannot be empty!";
+                exam=false;
+            }
+            else if (email_ob.value.indexOf("@")==-1) {
+                msg="'@' not present!";
+                exam=false;
+            }
+            else if (email_ob.value.indexOf(".com")==-1) {
+                msg="Complete the Email!";
+                exam=false;
+            }
+            return {exam,msg};
+        }
+
+        function new_gender_validate() {
+            var bool=gender_validate();
+            form_validate();
+        }
+
+        function gender_validate() {
+            var exam=true;
+            var msg="";
+            var gender_value = document.register.sex_name.value;
+            if (gender_value=="") {
+                exam=false;
+            }
+            return {exam,msg};
+        }
+
+        function new_bdate_validate() {
+            var msg="Age: ";
+            var exam=true;
+            var bdate_ob=document.getElementById("bdate_id");
+            var today = new Date();
+            var birthDate = new Date(bdate_ob.value);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m == 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            msg+=age;
+            msg+=" yrs";
+            document.getElementById("age").innerHTML=msg;
+        }
+
+        function new_security_validate() {
+            form_validate();
+            var bool=security_validate();
+            if (bool.exam) {
+                document.getElementById("imgques1").src="/images/tick.png";
+                document.getElementById("imgques1").title=bool.msg;
+                document.getElementById("imgques2").src="/images/tick.png";
+                document.getElementById("imgques2").title=bool.msg;
+            }
+            else {
+                document.getElementById("imgques1").src="/images/wrong.png";
+                document.getElementById("imgques1").title=bool.msg;
+                document.getElementById("imgques2").src="/images/wrong.png";
+                document.getElementById("imgques2").title=bool.msg;
+            }
+        }
+
+        function security_validate() {
+            var exam=true;
+            var msg="Accepted!";
+            var ob1=document.getElementById("ques1");
+            var ob2=document.getElementById("ques2");
+            if (ob1.value.length==0 || ob2.value.length==0) {
+                exam=false;
+                msg="Both Question Not Answered!";
+            }
+            return {exam,msg};
+        }
+
+        function form_validate() {
+            var bool=true;
+            var uname;
+            var sub_button=document.getElementById("button_submit_id");
+            uname = username_validate();
+            if (uname.exam)
+                uname = password_validate();
+            if (uname.exam)
+                uname = registration_validate();
+            if (uname.exam)
+                uname = roll_validate();
+            if (uname.exam)
+                uname = email_validate();
+            if (uname.exam)
+                uname = gender_validate();
+            if (uname.exam)
+                uname = passwordmatch_validate();
+            if (uname.exam)
+                uname = security_validate();
+            if (uname.exam){
+                sub_button.disabled=false;
+            }
+            else {
+                sub_button.disabled=true;
+            }
+        }
+
+        function reset_all() {
+            document.getElementById("imguser").src="";
+            document.getElementById("imguser").title="";
+            document.getElementById("imgpass").src="";
+            document.getElementById("imgpass").title="";
+            document.getElementById("imgreg").src="";
+            document.getElementById("imgreg").title="";
+            document.getElementById("imgroll").src="";
+            document.getElementById("imgroll").title="";
+            document.getElementById("imgemail").src="";
+            document.getElementById("imgemail").title="";
+            document.getElementById("age").innerHTML="";
+            document.getElementById("imgques1").src="";
+            document.getElementById("imgques1").title="";
+            document.getElementById("imgques2").src="";
+            document.getElementById("imgques2").title="";
+            document.getElementById("button_submit_id").disabled=true;
+        }
+
+    </script>
+</head>
+
+<body>
+<!-- this is my comment here  -->
+
+<div id="header">
+    <h1>STUDENT REGISTRATION</h1>
+</div>
+
+<a href="https://nitdgp.ac.in/" title="NIT Durgapur's Website"><img id=logo src="/images/nitlogo.png"/></a>
+
+<div id="whiteback">
+    <!--white  background goes here-->
+</div>
+
+<img id="thumbnail" src="/images/student.jpg"/>
+
+<div id="form">
+    <form name="register" id="regform" action="/users/registration" method="post" enctype="multipart/form-data">
+        Username :  <br />
+        <input type="text" name="user_name" maxlength="15" autocomplete="off" onkeyup="new_username_validate()" >
+        <img src="" title="" id="imguser" class="img_val" />
+        <br /><br />
+        Password : <br />
+        <input class="pass" type="password" name="pass_name" maxlength="20" onkeyup="new_password_validate()">
+        <img src="" title="" id="imgpass" class="img_val" />
+        <br /><br />
+        Confirm Password : <br />
+        <input class="pass" type="password" name="passmatch_name" maxlength="20" onkeyup="new_passwordmatch_validate()">
+        <img src="" title="" id="imgpassmatch" class="img_val" />
+        <br /><br />
+        Registration No. : <br />
+        <input type="text" id="reg_id" name="reg_name" autocomplete="off" onkeyup="new_registration_validate()">
+        <img src="" title="" id="imgreg" class="img_val" />
+        <br /><br />
+        Roll No. : <br />
+        <input type="text" id="roll_id" name="roll_name" autocomplete="off" onkeyup="new_roll_validate()">
+        <img src="" title="" id="imgroll" class="img_val" />
+        <br /><br />
+        Email ID : <br />
+        <input type="email" id="email_id" name="email_name" autocomplete="off" onkeyup="new_email_validate()" novalidate>
+        <img src="" title="" id="imgemail" class="img_val" />
+        <br /><br />
+        Gender : <br />
+        <input type="radio" name="sex_name" value="male" onclick="new_gender_validate()"> Male
+        <input type="radio" name="sex_name" value="female" onclick="new_gender_validate()"> Female
+        <input type="radio" name="sex_name" value="other" onclick="new_gender_validate()"> Others
+        <br /><br />
+        Date of Birth : <br />
+        <input type="date" id="bdate_id" name="bdate_name" onchange="new_bdate_validate()" max="2014-01-01" min="1995-01-01">
+        <p id="age"></p>
+        <br /> <br />
+        Department :
+        <select name="department_name">
+            <option value="CSE">CSE</option>
+            <option value="IT">IT</option>
+            <option value="ECE">ECE</option>
+            <option value="EE">EE</option>
+            <option value="ME">ME</option>
+            <option value="CE">CE</option>
+            <option value="CH">CH</option>
+            <option value="MME">MME</option>
+            <option value="BT">BT</option>
+        </select>
+        <br /><br />
+
+        <span id="photoup" >
+				Upload Photo : <br />
+					<input type="file" accept="image/*" name="photo">
+			</span>
+
+        Address : <br />
+        <textarea rows="5" cols="30" name="add_name">Enter address...</textarea>
+        <br/> <br/>
+
+        Security Question :
+        <br /><br />
+        Born in City:
+        <br/>
+        <input type="text" id="ques1" name="question1" autocomplete="off" onkeyup="new_security_validate()">
+        <img src="" title="" id="imgques1" class="img_val" />
+        <br /><br />
+        Pet Name:
+        <br />
+        <input type="text" id="ques2" name="question2" autocomplete="off" onkeyup="new_security_validate()">
+        <img src="" title="" id="imgques2" class="img_val" />
+        <br /><br />
+
+        <input id="button_submit_id" class="button_form" type="submit" value="SUBMIT" disabled/>
+        <input id="button_reset_id" class="button_form" type="reset" value="RESET" onclick="reset_all()" />
+    </form>
+</div>
+
+
+<!--Navigation bar-->
+<div class="topnav">
+    <a href="/nithome">Home</a>
+    <a href="#">News</a>
+    <a href="/adminlogin">Admin Login</a>
+    <a href="/contact1">Contact Us</a>
+</div>
+
+<div id="backtostudent">
+    Already Registered?
+
+    <a href="/studentlogin">Student login</a>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,304 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <title>Admin Home</title>
+
+    <style type="text/css">
+        body {
+            font-family: "arial";
+            background-color:rgb(255, 255, 204);
+            height:280%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 250%;
+        }
+        #logo {
+            position: absolute;
+            top:0%;
+            max-width: 15%;
+            max-height: 15%;
+        }
+        #header {
+            background-color: rgb(187, 187, 119);
+            width:100%;
+            height:15%;
+            position: absolute;
+            top:0%;
+            left:0%;
+        }
+
+        #form {
+            background-color: rgb(187, 187, 119);
+            padding: 10px;
+            position: absolute;
+            top:38%;
+            left:76%;
+            font-size: 18px;
+            border-radius: 4px;
+            color: #f2f2f2;
+        }
+
+        .button_form {
+            font-size: 14px;
+            padding: 6px 12px;
+        }
+
+        #whiteback {
+            text-align: center;
+            color: #75753e;
+            background-color: white;
+            height:  380px;
+            width: 285px;
+            position: absolute;
+            top: 30%;
+            left: 73%;
+            border-radius: 4px;
+        }
+        .topnav {
+            position: absolute;
+            top:15%;
+            background-color: rgb(187, 187, 119);
+            border:1px solid rgb(117, 117, 62);
+            border-right: 1px solid rgb(117, 117, 62);
+            border-left: 1px solid rgb(117, 117, 62);
+            left:0px;
+        }
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            padding: 13px 139px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        .topnav a:hover {
+            color: white;
+            background-color: #75753e;
+        }
+
+        .img_val {
+            position: relative;
+            max-height: 16px;
+            max-width: 16px;
+            top: 5px;
+        }
+
+        #age {
+            color:white;
+            display: inline;
+        }
+
+        .data{
+            color: #75753e;
+            overflow: scroll;
+            height: 400px;
+        }
+
+        #pendingtable {
+            position: absolute;
+            left: 8%;
+            top: 34%;
+        }
+
+        #pendingheader{
+            color: rgb(187, 187, 119);
+            position: absolute;
+            left: 8%;
+            top: 24%;
+        }
+
+        #rejectedtable {
+            position: absolute;
+            left: 8%;
+            top: 112%;
+        }
+
+        #rejectedheader{
+            color: rgb(187, 187, 119);
+            position: absolute;
+            left: 8%;
+            top: 102%;
+        }
+
+        #acceptedtable {
+            position: absolute;
+            left: 8%;
+            top: 190%;
+        }
+
+        #acceptedheader{
+            color: rgb(187, 187, 119);
+            position: absolute;
+            left: 8%;
+            top: 180%;
+        }
+
+
+        .student {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .student td, .student th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            overflow: hidden;
+            max-width: 200px;
+        }
+
+        .student tr:nth-child(even){background-color: white;}
+
+        .student tr:hover {background-color: #ddd;}
+
+        .student th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color:  rgb(187, 187, 119);
+            color: white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<!-- this is my comment here  -->
+
+<div id="header">
+    <h1>ADMIN HOME</h1>
+</div>
+
+<a href="https://nitdgp.ac.in/" title="NIT Durgapur's Website"><img id=logo src="/images/nitlogo.png"/></a>
+
+<h2 id="pendingheader">Pending Requests</h2>
+<div id="pendingtable" class="data">
+    <table class="student">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Reg. No</th>
+                <th>Roll. No</th>
+                <th>Email ID</th>
+                <th>Sex</th>
+                <th>Birthday</th>
+                <th>Department</th>
+                <th>Address</th>
+                <th>Security1</th>
+                <th>Security2</th>
+                <th>Activate</th>
+                <th>Reject</th>
+            </tr>
+        </thead>
+        <tbody>
+        <%var i=0; students.forEach(function(student){i++; if(student.active=="Pending"){%>
+        <tr>
+            <td><%= student.username_no %></td>
+            <td><%= student.reg_no %></td>
+            <td><%= student.roll_no %></td>
+            <td><%= student.passname_no %></td>
+            <td><%= student.sexname_no %></td>
+            <td><%= student.bdate %></td>
+            <td><%= student.departmentname_no %></td>
+            <td><%= student.addname_no %></td>
+            <td><%= student.question1 %></td>
+            <td><%= student.question2 %></td>
+            <td><a href="/users/activate/<%=student.reg_no%>">Activate</a></td>
+            <td><a href="/users/reject/<%=student.reg_no%>">Reject</a></td>
+        </tr>
+        <% }}); %>
+        </tbody>
+    </table>
+</div>
+
+<h2 id="rejectedheader">Rejected Requests</h2>
+<div id="rejectedtable" class="data">
+    <table class="student">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Reg. No</th>
+            <th>Roll. No</th>
+            <th>Email ID</th>
+            <th>Sex</th>
+            <th>Birthday</th>
+            <th>Department</th>
+            <th>Address</th>
+            <th>Security1</th>
+            <th>Security2</th>
+            <th>Activate</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%var i=0; students.forEach(function(student){i++; if(student.active=="Rejected"){%>
+        <tr>
+            <td><%= student.username_no %></td>
+            <td><%= student.reg_no %></td>
+            <td><%= student.roll_no %></td>
+            <td><%= student.email %></td>
+            <td><%= student.sexname_no %></td>
+            <td><%= student.bdate %></td>
+            <td><%= student.departmentname_no %></td>
+            <td><%= student.addname_no %></td>
+            <td><%= student.question1 %></td>
+            <td><%= student.question2 %></td>
+            <td><a href="/users/activate/<%=student.reg_no%>">Activate</a></td>
+        </tr>
+        <% }}); %>
+        </tbody>
+    </table>
+</div>
+
+<h2 id="acceptedheader">Accepted Requests</h2>
+<div id="acceptedtable" class="data">
+    <table class="student">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Reg. No</th>
+            <th>Roll. No</th>
+            <th>Email ID</th>
+            <th>Sex</th>
+            <th>Birthday</th>
+            <th>Department</th>
+            <th>Address</th>
+            <th>Security1</th>
+            <th>Security2</th>
+            <th>Reject</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%var i=0; students.forEach(function(student){i++; if(student.active=="Accepted"){%>
+        <tr>
+            <td><%= student.username_no %></td>
+            <td><%= student.reg_no %></td>
+            <td><%= student.roll_no %></td>
+            <td><%= student.email %></td>
+            <td><%= student.sexname_no %></td>
+            <td><%= student.bdate %></td>
+            <td><%= student.departmentname_no %></td>
+            <td><%= student.addname_no %></td>
+            <td><%= student.question1 %></td>
+            <td><%= student.question2 %></td>
+            <td><a href="/users/reject/<%=student.reg_no%>">Reject</a></td>
+        </tr>
+        <% }}); %>
+        </tbody>
+    </table>
+</div>
+
+<!--Navigation bar-->
+<div class="topnav">
+    <a href="/">Home</a>
+    <a href="#">News</a>
+    <a href="/contact1">Contact Us</a>
+    <a href="/adminlogin">Log Out</a>
+</div>
+
+</body>
+
+</html>

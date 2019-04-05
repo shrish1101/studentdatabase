@@ -1,0 +1,293 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <title>Student Home</title>
+
+    <style type="text/css">
+        body {
+            font-family: "arial";
+            background-color:rgb(255, 255, 204);
+            height:280%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 250%;
+        }
+        #logo {
+            position: absolute;
+            top:0%;
+            max-width: 15%;
+            max-height: 15%;
+        }
+        #header {
+            background-color: rgb(187, 187, 119);
+            width:100%;
+            height:15%;
+            position: absolute;
+            top:0%;
+            left:0%;
+        }
+
+        .form {
+            background-color: rgb(187, 187, 119);
+            font-size: 18px;
+            border-radius: 4px;
+            color: #f2f2f2;
+            padding: 10px;
+        }
+
+        #updatedetails {
+            position: absolute;
+            top:38%;
+            left:75%;
+        }
+
+        #updatepassword {
+            position: absolute;
+            top:38%;
+            left:35%;
+        }
+
+        #detailsheader{
+            color: rgb(187, 187, 119);
+            position: absolute;
+            top:28%;
+            left:79%;
+        }
+
+        #passwordheader{
+            color: rgb(187, 187, 119);
+            position: absolute;
+            top:28%;
+            left:35%;
+        }
+
+        #deleteheader{
+            color: rgb(187, 187, 119);
+            position: absolute;
+            top:28%;
+            left:56%;
+        }
+
+        #deleteaccount{
+            position: absolute;
+            top:38%;
+            left:55%;
+        }
+
+        .button_form {
+            font-size: 14px;
+            padding: 6px 12px;
+        }
+
+        #whiteback {
+            text-align: center;
+            color: #75753e;
+            background-color: white;
+            height:  380px;
+            width: 285px;
+            position: absolute;
+            top: 30%;
+            left: 73%;
+            border-radius: 4px;
+        }
+        .topnav {
+            position: absolute;
+            top:15%;
+            background-color: rgb(187, 187, 119);
+            border:1px solid rgb(117, 117, 62);
+            border-right: 1px solid rgb(117, 117, 62);
+            border-left: 1px solid rgb(117, 117, 62);
+            left:0px;
+        }
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            padding: 13px 140px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        .topnav a:hover {
+            color: white;
+            background-color: #75753e;
+        }
+
+
+        #data {
+            position: absolute;
+            left: 5%;
+            top: 80%;
+            color: #75753e;
+        }
+
+        #student {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #student td, #student th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            overflow: hidden;
+            max-width: 200px;
+        }
+
+        #student tr:nth-child(even){background-color: white;}
+
+        #student tr:hover {background-color: #ddd;}
+
+        #student th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color:  rgb(187, 187, 119);
+            color: white;
+        }
+
+        #photo{
+            max-width: 250px;
+            max-height: 250px;
+            position: absolute;
+            top: 36%;
+            left: 10%;
+        }
+    </style>
+
+    <script>
+        function updateform() {
+            var usern = document.getElementById("usern");
+            var em=document.getElementById("email_id");
+            var add=document.getElementById("add");
+            var pic=document.getElementById("photo")
+            if (usern!='' && em!='' && add!="" && pic!=undefined) {
+                var button=document.getElementById("button_submit_id");
+                button.disabled=false;
+            }
+        }
+    </script>
+
+
+</head>
+
+<body>
+<!-- this is my comment here  -->
+
+<div id="header">
+    <h1>STUDENT HOME</h1>
+</div>
+
+<a href="https://nitdgp.ac.in/" title="NIT Durgapur's Website"><img id=logo src="/images/nitlogo.png"/></a>
+
+
+<div id="data">
+    <table id="student">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Reg. No</th>
+            <th>Roll. No</th>
+            <th>Email ID</th>
+            <th>Sex</th>
+            <th>Birthday</th>
+            <th>Department</th>
+            <th>Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><%= student.username_no %></td>
+            <td><%= student.reg_no %></td>
+            <td><%= student.roll_no %></td>
+            <td><%= student.email %></td>
+            <td><%= student.sexname_no %></td>
+            <td><%= student.bdate %></td>
+            <td><%= student.departmentname_no %></td>
+            <td><%= student.addname_no %></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<h2 id="detailsheader">Update Details</h2>
+
+<div id="updatedetails" class="form">
+    <form action="/users/updatedetails/<%= student.reg_no %> " method="post" enctype="multipart/form-data">
+        Username :  <br />
+        <input id="usern" type="text" name="user_name" maxlength="15" autocomplete="off" onkeyup="updateform()"> <br /><br />
+
+        Email ID : <br />
+        <input type="email" id="email_id" name="email_name" autocomplete="off" onkeyup="updateform()"> <br /><br />
+
+
+        <input type="file" accept="image/*" name="photo" id="photo" onselect="updateform()">
+        <br>Upload Photo
+
+        <br /><br />
+        Address : <br />
+        <textarea id="add" rows="5" cols="30" name="add_name" onkeyup="updateform()">Enter address...</textarea>
+        <br/> <br/>
+
+
+        <input id="button_submit_id" class="button_form" type="submit" value="SUBMIT" disabled/>
+        <input id="button_reset_id" class="button_form" type="reset" value="RESET" />
+    </form>
+</div>
+
+<h2 id="passwordheader">Change Password</h2>
+
+<div id="updatepassword" class="form">
+    <form action="/users/updatepassword/<%= student.reg_no %> " method="post">
+        Old Password : <br />
+        <input class="pass" type="password" name="oldpass" maxlength="20">
+        <br /><br />
+        New Password : <br />
+        <input class="pass" type="password" name="newpass" maxlength="20">
+        <br /><br />
+        Confirm Password : <br />
+        <input class="pass" type="password" name="cnewpass" maxlength="20">
+        <br /><br />
+
+
+        <input id="button_submit_id" class="button_form" type="submit" value="SUBMIT" />
+        <input id="button_reset_id" class="button_form" type="reset" value="RESET" />
+    </form>
+</div>
+
+<h2 id="deleteheader">Delete Account</h2>
+<div id="deleteaccount" class="form">
+    <form action="/users/deleteaccount/<%=student.reg_no%>" method="post">
+        Password : <br />
+        <input class="pass" type="password" name="pass" maxlength="20">
+        <br /><br />
+        Security Question 1 : <br />
+        <input class="pass" type="password" name="question1" maxlength="20">
+        <br /><br />
+        Security Question 2 : <br />
+        <input class="pass" type="password" name="question2" maxlength="20">
+        <br /><br />
+
+
+        <input id="button_submit_id" class="button_form" type="submit" value="SUBMIT" />
+        <input id="button_reset_id" class="button_form" type="reset" value="RESET" />
+    </form>
+</div>
+
+<img id="photo" src="<%= student.photo_url%>"/>
+
+
+<!--Navigation bar-->
+<div class="topnav">
+    <a href="/">Home</a>
+    <a href="#">News</a>
+    <a href="/contact1">Contact Us</a>
+    <a href="/studentlogin">Log Out</a>
+</div>
+
+</body>
+
+</html>

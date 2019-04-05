@@ -1,0 +1,144 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <title>Admin Login</title>
+
+    <style type="text/css">
+        body {
+            font-family: "arial";
+            background-color:rgb(255, 255, 204)
+        }
+        h1 {
+            text-align: center;
+            font-size: 40px;
+        }
+        #img0 {
+            position: absolute;
+            top:0px;
+            max-width: 100px;
+            max-height: 100px;
+        }
+        #header {
+            background-color: rgb(187, 187, 119);
+            width:100%;
+            height:15%;
+            position: absolute;
+            top:0px;
+            left:0px;
+        }
+        #img1 {
+            border-bottom: 1px solid black;
+            position: absolute;
+            top:265px;
+            left:400px;
+            max-width: 200px;
+            max-height: 230px;
+        }
+        #form {
+            text-align: center;
+            background-color: rgb(187, 187, 119);
+            padding: 10px;
+            position: absolute;
+            top:270px;
+            left:660px;
+            font-size: 18px;
+            border-radius: 4px;
+            color: #f2f2f2;
+        }
+
+        .botton1 {
+            font-size: 14px;
+            padding: 6px 12px;
+            position: relative;
+            left: 30px;
+        }
+
+        #forgotsign {
+            position: absolute;
+            top: 435px;
+            left:740px;
+            text-align: center;
+        }
+        #forgotsign a:link{
+            text-decoration: underline;
+        }
+        #forgotsign a:hover{
+            text-decoration: none;
+        }
+
+        #whiteback {
+            background-color: white;
+            height:  300px;
+            width: 650px;
+            position: absolute;
+            top: 215px;
+            left: 345px;
+            border-radius: 4px;
+        }
+        .topnav {
+            position: absolute;
+            top:15%;
+            background-color: rgb(187, 187, 119);
+            border-top: 1px solid rgb(117, 117, 62);
+            border-bottom: 1px solid rgb(117, 117, 62);
+            left:0px;
+        }
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            padding: 13px 136px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        .topnav a:hover {
+            color: white;
+            background-color: #75753e;
+        }
+
+    </style>
+</head>
+
+<body>
+<!-- this is my comment here  -->
+
+<div id="header">
+    <h1>ADMIN LOGIN</h1>
+</div>
+
+<a href="https://nitdgp.ac.in/" title="NIT Durgapur's Website"><img id=img0 src="/images/nitlogo.png"/></a>
+
+<div id="whiteback">
+    <!--white  background goes here-->
+</div>
+
+<img id="img1" src="/images/admin.png"/>
+
+<div id="form">
+    <form action="/users/admin/login" method="post">
+        Username : <input type="text" name="username" maxlength="15">
+        <br /> <br />
+        Password : <input class="pass" type="password" name="pword" maxlength="20">
+        <br /> <br />
+        <input class="botton1" type="submit" value="Login">
+    </form>
+</div>
+
+<div id="forgotsign">
+    <a href="/forgotpassword">Forgot Password?</a>
+</div>
+
+
+<!--Navigation bar-->
+<div class="topnav">
+    <a href="/nithome">Home</a>
+    <a href="">News</a>
+    <a href="/studentlogin">Student Login</a>
+    <a href="/contact1">Contact Us</a>
+</div>
+
+</body>
+
+</html>

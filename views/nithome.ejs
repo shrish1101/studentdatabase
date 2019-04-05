@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home Page Layout</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /*image+text*/
+        .container {
+            position: relative;
+        }
+
+        /*to position the text in center of image*/
+        .center {
+            position: absolute;
+            left: 0;
+            top:7.5%;
+            width: 100%;
+            color:#ffffff;
+            text-align: center;
+            font-size: 100px;
+            font-size-adjust: 0.58;
+            font-family: 'Abril Fatface', cursive;
+
+        }
+
+        /*body*/
+        body {
+            margin: 0;
+            font-family: "Lato", sans-serif;
+        }
+
+        /*header */
+        .header {
+            background-color: #000000;
+            padding: 5px;
+
+        }
+
+        /*top navigation bar */
+        .topnav {
+            overflow: hidden;
+            background-color: #041daf;
+            font-family: "Lato", sans-serif;
+        }
+
+        /*the topnav links */
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /*change color on hover*/
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /*responsive layout*/
+        @media screen and (max-width:600px) {
+            .column {
+                width: 100%;
+            }
+        }
+
+        /* footer */
+        .footer {
+            background-color: #f1f1f1;
+            text-align:center;
+            padding: 20px;
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <img src="/images/nitlogo.png" alt="NIT_DGP Logo" style="width:200px;height:200px;position: top-left;">
+</div>
+
+<div class="topnav">
+    <a href="#">News</a>
+    <a href="/studentlogin">User-Login</a>
+    <a href="/registration">User-Registration</a>
+    <a href="/adminlogin">Admin-Login</a>
+    <a href="/contact1">Contact Us</a>
+</div>
+
+
+
+<div class="container">
+    <img src="/images/home.jpg" alt="image" style="height:auto; width:100%;opacity: 0.6;">
+    <div class="center">
+        <p>STUDENT INFORMATION SYSTEM</p>
+    </div>
+</div>
+
+
+</div class="footer">
+<p>&copy; Copyright 2019 IT@NITDGP</p>
+</div>
+
+</div>
+
+</body>
+</html>

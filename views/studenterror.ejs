@@ -1,0 +1,90 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <title>Error</title>
+
+    <style type="text/css">
+        body {
+            font-family: "arial";
+            background-color:rgb(255, 255, 204);
+            height:280%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 250%;
+        }
+        #logo {
+            position: absolute;
+            top:0%;
+            max-width: 15%;
+            max-height: 15%;
+        }
+        #header {
+            background-color: rgb(187, 187, 119);
+            width:100%;
+            height:15%;
+            position: absolute;
+            top:0%;
+            left:0%;
+        }
+
+        .topnav {
+            position: absolute;
+            top:15%;
+            background-color: rgb(187, 187, 119);
+            border:1px solid rgb(117, 117, 62);
+            border-right: 1px solid rgb(117, 117, 62);
+            border-left: 1px solid rgb(117, 117, 62);
+            left:0px;
+        }
+        .topnav a {
+            float: left;
+            color: #f2f2f2;
+            padding: 13px 135px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        .topnav a:hover {
+            color: white;
+            background-color: #75753e;
+        }
+
+        #errormsg {
+            position:absolute;
+            top: 35%;
+            left:43%;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+<!-- this is my comment here  -->
+
+<div id="header">
+    <h1>STUDENT HOME</h1>
+</div>
+
+<a href="https://nitdgp.ac.in/" title="NIT Durgapur's Website"><img id=logo src="/images/nitlogo.png"/></a>
+
+
+<!--Navigation bar-->
+<div class="topnav">
+    <a href="/">Home</a>
+    <a href="#">News</a>
+    <a href="/studentlogin">Student Login</a>
+    <a href="/contact1">Contact Us</a>
+</div>
+
+<div id="errormsg">
+    <h2><%= msg %></h2>
+</div>
+
+</body>
+
+</html>
